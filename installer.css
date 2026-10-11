@@ -1,0 +1,10 @@
+body{min-height:100vh;display:grid;place-items:center;padding:24px}
+.installer{width:min(760px,100%);padding:clamp(22px,4vw,44px)}
+.installer form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.installer label{display:grid;gap:6px;font-weight:600}
+.installer input,.installer select{width:100%;padding:12px;border:var(--cm-glass-border);border-radius:var(--cm-radius-md);background:var(--cm-glass-bg-strong);color:var(--cm-text)}
+.installer .wide{grid-column:1/-1}
+.installer .error{padding:12px;border-radius:var(--cm-radius-md);background:var(--cm-glass-bg-strong);color:var(--cm-danger-text);border:var(--cm-glass-border);margin:8px 0}
+.installer .success{padding:18px;border-radius:var(--cm-radius-md);background:var(--cm-glass-bg-strong);color:var(--cm-success-text);border:var(--cm-glass-border)}
+.installer .muted{opacity:.75}
+@media(max-width:600px){.installer form{grid-template-columns:1fr}.installer .wide{grid-column:auto}}

@@ -1,0 +1,158 @@
+/* ==========================================================================
+   CrystalMarket — Design Tokens (single source of truth for the visual identity)
+   Derived from the reference image. Every other stylesheet MUST use var(--cm-*)
+   and MUST NOT hard-code colours, shadows or radii (checked by tools/lint_css.py).
+   Themes: light (default) | dark | green | rose  -> [data-theme="…"] on <html> (or on any element for previews)
+   ========================================================================== */
+
+/* ---- 1. Theme-independent tokens ---------------------------------------- */
+/* Declared on :root AND [data-theme] so derived tokens (glass, shadows, gradients) are
+   recomputed inside any element that carries a theme — needed by the theme-picker previews. */
+:root, [data-theme] {
+  /* Decorative art accents (centralized so application CSS has no colour literals) */
+  --cm-art-white-rgb: 255 255 255;
+  --cm-art-blue-rgb: 113 137 255;
+  --cm-art-blue-light-rgb: 133 152 255;
+  --cm-art-blue-mid-rgb: 128 165 255;
+  --cm-art-blue-soft-rgb: 130 159 255;
+  --cm-art-violet-rgb: 186 139 255;
+  --cm-art-lilac-rgb: 226 182 255;
+  --cm-art-pink-rgb: 250 190 225;
+  --cm-art-pink-light-rgb: 255 145 190;
+  --cm-art-pink-mid-rgb: 236 120 184;
+  --cm-art-rose-rgb: 238 157 228;
+  --cm-art-green-rgb: 100 207 164;
+  --cm-art-gold-rgb: 245 181 61;
+  --cm-art-shadow-rgb: 60 66 160;
+  --cm-swatch-light-a: #e4eaff; --cm-swatch-light-b: #ffffff;
+  --cm-swatch-dark-a: #121632; --cm-swatch-dark-b: #464d85;
+  --cm-swatch-green-a: #c8efd6; --cm-swatch-green-b: #168047;
+  --cm-swatch-rose-a: #f9d3e4; --cm-swatch-rose-b: #c42a66;
+
+  --cm-radius-circle: 50%; --cm-radius-xs: 9px; --cm-blur-art: 2px;
+
+  /* Typography */
+  --cm-font-sans: "Inter", "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --cm-fs-xs: .75rem;  --cm-fs-sm: .8125rem; --cm-fs-md: .9375rem; --cm-fs-lg: 1.125rem;
+  --cm-fs-xl: 1.5rem;  --cm-fs-2xl: 2.25rem; --cm-fs-hero: clamp(1.75rem, 2.2vw + 1rem, 2.75rem);
+  --cm-fw-regular: 400; --cm-fw-medium: 500; --cm-fw-semibold: 600; --cm-fw-bold: 700;
+  --cm-lh-tight: 1.2; --cm-lh-body: 1.55;
+
+  /* Spacing scale (4px base) */
+  --cm-space-1: .25rem; --cm-space-2: .5rem;  --cm-space-3: .75rem; --cm-space-4: 1rem;
+  --cm-space-5: 1.25rem; --cm-space-6: 1.5rem; --cm-space-8: 2rem;  --cm-space-10: 2.5rem; --cm-space-12: 3rem;
+
+  /* Radii (cards 24, panels 28, controls 14, pills 999) */
+  --cm-radius-sm: 10px; --cm-radius-md: 14px; --cm-radius-lg: 20px;
+  --cm-radius-xl: 24px; --cm-radius-2xl: 28px; --cm-radius-pill: 999px;
+
+  /* Layout */
+  --cm-sidebar-w: 232px; --cm-filters-w: 288px; --cm-header-h: 72px; --cm-container-max: 1440px;
+
+  /* Glass blur (kept moderate for performance) */
+  --cm-blur-sm: 10px; --cm-blur: 18px; --cm-blur-lg: 28px; --cm-saturate: 140%;
+
+  /* Elevation — three layers: ambient + key + inner light edge */
+  --cm-shadow-sm: 0 2px 6px -1px rgb(var(--cm-shadow-rgb) / .14), 0 1px 0 0 rgb(var(--cm-edge-rgb) / .55) inset;
+  --cm-shadow-md: 0 10px 24px -8px rgb(var(--cm-shadow-rgb) / .22), 0 2px 6px -2px rgb(var(--cm-shadow-rgb) / .12), 0 1px 0 0 rgb(var(--cm-edge-rgb) / .6) inset;
+  --cm-shadow-lg: 0 28px 60px -18px rgb(var(--cm-shadow-rgb) / .30), 0 10px 24px -10px rgb(var(--cm-shadow-rgb) / .16), 0 1px 0 0 rgb(var(--cm-edge-rgb) / .65) inset;
+  --cm-shadow-card-3d: 0 34px 50px -26px rgb(var(--cm-shadow-rgb) / .38), 0 14px 22px -12px rgb(var(--cm-shadow-rgb) / .20), 0 1px 0 0 rgb(var(--cm-edge-rgb) / .8) inset, 0 -1px 0 0 rgb(var(--cm-shadow-rgb) / .06) inset;
+  --cm-shadow-glow: 0 10px 26px -8px rgb(var(--cm-primary-glow-rgb) / .55);
+  --cm-shadow-focus: 0 0 0 3px rgb(var(--cm-focus-rgb) / .45);
+
+  /* Glass surfaces (composed from the per-theme channels below) */
+  --cm-glass-bg: rgb(var(--cm-glass-rgb) / var(--cm-glass-alpha));
+  --cm-glass-bg-strong: rgb(var(--cm-glass-rgb) / var(--cm-glass-alpha-strong));
+  --cm-glass-border: 1px solid rgb(var(--cm-edge-rgb) / var(--cm-glass-border-alpha));
+  --cm-glass-gradient: linear-gradient(145deg, rgb(var(--cm-edge-rgb) / .38), rgb(var(--cm-edge-rgb) / 0) 55%);
+
+  /* Gradients */
+  --cm-bg-gradient: radial-gradient(60rem 40rem at 8% 6%, var(--cm-bg-1), transparent 60%),
+                    radial-gradient(54rem 38rem at 92% 10%, var(--cm-bg-2), transparent 62%),
+                    radial-gradient(60rem 46rem at 85% 95%, var(--cm-bg-3), transparent 62%),
+                    linear-gradient(160deg, var(--cm-bg-4), var(--cm-bg-1));
+  --cm-primary-gradient: linear-gradient(135deg, var(--cm-primary-from), var(--cm-primary-to));
+  --cm-gold-gradient: linear-gradient(135deg, var(--cm-gold), var(--cm-gold-deep));
+
+  /* Motion */
+  --cm-ease: cubic-bezier(.22, .8, .24, 1);
+  --cm-dur-fast: 120ms; --cm-dur: 220ms; --cm-dur-slow: 420ms;
+  --cm-lift: translateY(-4px);          /* hover lift for 3D cards */
+
+  /* Z-index scale */
+  --cm-z-header: 40; --cm-z-dropdown: 60; --cm-z-modal: 80; --cm-z-toast: 100;
+}
+
+/* ---- 2. Themes (per-theme channels + colours) ---------------------------- */
+/* LIGHT — default, matches the reference image */
+:root, [data-theme="light"] {
+  color-scheme: light;
+  --cm-bg-1: #dce6ff; --cm-bg-2: #e8ddfb; --cm-bg-3: #fbdde9; --cm-bg-4: #cfe3ff;
+  --cm-glass-rgb: 255 255 255; --cm-glass-alpha: .62; --cm-glass-alpha-strong: .82; --cm-glass-border-alpha: .7;
+  --cm-edge-rgb: 255 255 255; --cm-shadow-rgb: 46 56 130;
+  --cm-card-bg: #ffffff;
+  --cm-text: #14183a; --cm-text-muted: #444a73; --cm-link: #2a45d6;
+  --cm-primary-from: #3a55e8; --cm-primary-to: #6a3df0; --cm-on-primary: #ffffff; --cm-primary-glow-rgb: 74 76 240;
+  --cm-gold: #f5b53d; --cm-gold-deep: #e8962a; --cm-on-gold: #3b2600;
+  --cm-danger: #d92d4a; --cm-danger-text: #b3203b; --cm-on-danger: #ffffff;
+  --cm-success-text: #0d6b4a; --cm-warning-text: #8a5200; --cm-info-text: #1f4fb8;
+  --cm-focus: #1f3fd0; --cm-focus-rgb: 31 63 208;
+}
+/* DARK */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --cm-bg-1: #0b1030; --cm-bg-2: #1a1050; --cm-bg-3: #2a0f4a; --cm-bg-4: #0a2250;
+  --cm-glass-rgb: 24 30 72; --cm-glass-alpha: .58; --cm-glass-alpha-strong: .82; --cm-glass-border-alpha: .16;
+  --cm-edge-rgb: 190 205 255; --cm-shadow-rgb: 0 0 12;
+  --cm-card-bg: #181d4a;
+  --cm-text: #f2f4ff; --cm-text-muted: #b9c0ea; --cm-link: #9db1ff;
+  --cm-primary-from: #4c63e8; --cm-primary-to: #7a49e6; --cm-on-primary: #ffffff; --cm-primary-glow-rgb: 122 100 255;
+  --cm-gold: #f5b53d; --cm-gold-deep: #e8962a; --cm-on-gold: #3b2600;
+  --cm-danger: #ff6b82; --cm-danger-text: #ff9aa9; --cm-on-danger: #2a0510;
+  --cm-success-text: #5fe0b0; --cm-warning-text: #ffc66b; --cm-info-text: #9db8ff;
+  --cm-focus: #9db1ff; --cm-focus-rgb: 157 177 255;
+}
+/* GREEN */
+[data-theme="green"] {
+  color-scheme: light;
+  --cm-bg-1: #d8f5e3; --cm-bg-2: #e3f7d9; --cm-bg-3: #cff0ea; --cm-bg-4: #dcefd0;
+  --cm-glass-rgb: 255 255 255; --cm-glass-alpha: .62; --cm-glass-alpha-strong: .82; --cm-glass-border-alpha: .7;
+  --cm-edge-rgb: 255 255 255; --cm-shadow-rgb: 20 90 60;
+  --cm-card-bg: #ffffff;
+  --cm-text: #0f2a1c; --cm-text-muted: #3a5646; --cm-link: #0b6b45;
+  --cm-primary-from: #168047; --cm-primary-to: #0b6f5d; --cm-on-primary: #ffffff; --cm-primary-glow-rgb: 22 140 90;
+  --cm-gold: #f5b53d; --cm-gold-deep: #e8962a; --cm-on-gold: #3b2600;
+  --cm-danger: #d92d4a; --cm-danger-text: #b3203b; --cm-on-danger: #ffffff;
+  --cm-success-text: #0d6b4a; --cm-warning-text: #8a5200; --cm-info-text: #1f4fb8;
+  --cm-focus: #0b5f3c; --cm-focus-rgb: 11 95 60;
+}
+/* ROSE */
+[data-theme="rose"] {
+  color-scheme: light;
+  --cm-bg-1: #fcdde9; --cm-bg-2: #f3ddfb; --cm-bg-3: #ffe0d6; --cm-bg-4: #f9d0e4;
+  --cm-glass-rgb: 255 255 255; --cm-glass-alpha: .62; --cm-glass-alpha-strong: .82; --cm-glass-border-alpha: .7;
+  --cm-edge-rgb: 255 255 255; --cm-shadow-rgb: 130 40 90;
+  --cm-card-bg: #ffffff;
+  --cm-text: #3a0f26; --cm-text-muted: #66344f; --cm-link: #a3195b;
+  --cm-primary-from: #c42a66; --cm-primary-to: #9a2cc0; --cm-on-primary: #ffffff; --cm-primary-glow-rgb: 196 60 130;
+  --cm-gold: #f5b53d; --cm-gold-deep: #e8962a; --cm-on-gold: #3b2600;
+  --cm-danger: #d92d4a; --cm-danger-text: #a81c36; --cm-on-danger: #ffffff;
+  --cm-success-text: #0d6b4a; --cm-warning-text: #7f4a00; --cm-info-text: #1f4fb8;
+  --cm-focus: #8c1450; --cm-focus-rgb: 140 20 80;
+}
+
+/* ---- 3. User-preference & capability fallbacks --------------------------- */
+/* Placed AFTER the themes with equal specificity so they win by order. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root, [data-theme] { --cm-glass-alpha: .92; --cm-glass-alpha-strong: .96; --cm-blur: 0px; --cm-blur-sm: 0px; --cm-blur-lg: 0px; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root, [data-theme] { --cm-glass-alpha: .96; --cm-glass-alpha-strong: .98; --cm-blur: 0px; --cm-blur-sm: 0px; --cm-blur-lg: 0px; }
+}
+@media (prefers-contrast: more) {
+  :root, [data-theme] { --cm-glass-alpha: .92; --cm-glass-alpha-strong: .96; --cm-glass-border-alpha: .95; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root, [data-theme] { --cm-dur-fast: 1ms; --cm-dur: 1ms; --cm-dur-slow: 1ms; --cm-lift: none; }
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 1ms !important; }
+}
