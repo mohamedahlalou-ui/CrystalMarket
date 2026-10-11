@@ -1,0 +1,14 @@
+{
+  "id": "/",
+  "name": "CrystalMarket",
+  "short_name": "CrystalMarket",
+  "description": "A modern community marketplace.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#dce6ff",
+  "theme_color": "#3a55e8",
+  "icons": [
+    { "src": "/assets/icons/crystal.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
